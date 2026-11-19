@@ -74,8 +74,8 @@ adb devices
 
 Clone the repository and execute the optimization script:
 ```bash
-git clone https://github.com/amolvbharambe/redminote12.git
-cd redminote12
+git clone https://github.com/amolvbharambe/redminote12-5g.git
+cd redminote12-5g
 chmod +x optimize_redminote12.sh
 ./optimize_redminote12.sh
 ```
@@ -115,4 +115,4 @@ All removals are 100% reversible without root or factory resetting.
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License.
