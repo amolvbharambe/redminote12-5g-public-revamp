@@ -74,8 +74,8 @@ adb devices
 
 Clone the repository and execute the optimization script:
 ```bash
-git clone https://github.com/amolvbharambe/redminote12-5g.git
-cd redminote12-5g
+git clone https://github.com/amolvbharambe/redminote12-5g-public-revamp.git
+cd redminote12-5g-public-revamp
 chmod +x optimize_redminote12.sh
 ./optimize_redminote12.sh
 ```
