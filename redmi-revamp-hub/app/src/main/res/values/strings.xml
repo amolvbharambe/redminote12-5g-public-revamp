@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Redmi Revamp Hub</string>
     <string name="subtitle">Redmi Note 12 5G (HyperOS / MIUI)</string>
-    <string name="shizuku_not_connected">🔴 Shizuku Disconnected (Tap to connect)</string>
-    <string name="shizuku_connected">🟢 Shizuku Connected (Shell Privileges)</string>
+    <string name="shizuku_not_connected">🔴 Shizuku-Next Disconnected (Tap to connect)</string>
+    <string name="shizuku_connected">🟢 Shizuku-Next Connected (Active Privileges)</string>
     <string name="run_full_optimization">⚡ RUN FULL OPTIMIZATION</string>
     <string name="quick_toggles">⚡ Performance &amp; System Toggles</string>
     <string name="toggle_120hz">Force 120Hz Refresh Rate</string>

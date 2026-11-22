@@ -161,6 +161,12 @@ public class OptimizationEngine {
         list.add("dumpsys deviceidle whitelist +com.sand.airdroidkids");
         list.add("cmd appops set com.sand.airdroidkids 10008 allow");
 
+        // Shizuku-Next / Shizuku Server Protection (Prevent HyperOS from killing binder daemon)
+        list.add("am set-standby-bucket moe.shizuku.privileged.api exempted");
+        list.add("dumpsys deviceidle whitelist +moe.shizuku.privileged.api");
+        list.add("cmd appops set moe.shizuku.privileged.api 10008 allow");
+        list.add("cmd appops set moe.shizuku.privileged.api RUN_ANY_IN_BACKGROUND allow");
+
         return list;
     }
 

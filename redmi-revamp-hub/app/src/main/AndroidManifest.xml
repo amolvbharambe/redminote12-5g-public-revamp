@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RedmiRevampHub">
 
-        <!-- Shizuku Provider -->
+        <!-- Shizuku / Shizuku-Next Provider -->
         <provider
-            android:name="moe.shizuku.api.ShizukuProvider"
+            android:name="rikka.shizuku.ShizukuProvider"
             android:authorities="${applicationId}.shizuku"
             android:multiprocess="false"
             android:enabled="true"
