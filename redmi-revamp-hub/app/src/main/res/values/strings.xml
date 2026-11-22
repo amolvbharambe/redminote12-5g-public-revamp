@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Redmi Revamp Hub</string>
+    <string name="subtitle">Redmi Note 12 5G (HyperOS / MIUI)</string>
+    <string name="shizuku_not_connected">🔴 Shizuku Disconnected (Tap to connect)</string>
+    <string name="shizuku_connected">🟢 Shizuku Connected (Shell Privileges)</string>
+    <string name="run_full_optimization">⚡ RUN FULL OPTIMIZATION</string>
+    <string name="quick_toggles">⚡ Performance &amp; System Toggles</string>
+    <string name="toggle_120hz">Force 120Hz Refresh Rate</string>
+    <string name="toggle_120hz_sub">Prevents throttling down to 60Hz in YouTube &amp; Maps</string>
+    <string name="toggle_animations">0.5x UI Animations</string>
+    <string name="toggle_animations_sub">Cuts transition delays in half for instant snappiness</string>
+    <string name="toggle_adguard">AdGuard System-Wide Ad-Blocking</string>
+    <string name="toggle_adguard_sub">Zero-battery DNS level in-app and web ad filter</string>
+    <string name="toggle_fast_doze">Fast Deep Sleep (2-min Doze)</string>
+    <string name="toggle_fast_doze_sub">Reduces overnight idle standby battery drain to 1–2%</string>
+    <string name="toggle_modem_sleep">Cellular Modem Sleep on Wi-Fi</string>
+    <string name="toggle_modem_sleep_sub">Turns off idle 5G/4G radio power while on home Wi-Fi</string>
+    <string name="toggle_5g_boost">Jio 5G Multi-Carrier Aggregation</string>
+    <string name="toggle_5g_boost_sub">Disables Xiaomi 5G power throttling for lowest ping</string>
+    <string name="critical_safeguards">🛡️ Critical Safeguards (Non-Negotiables)</string>
+    <string name="safeguard_nobroker">NoBrokerHood: Gate Pass &amp; Intercom Calls</string>
+    <string name="safeguard_whatsapp">WhatsApp: Incoming Calls &amp; PiP Video</string>
+    <string name="safeguard_location">Live Location: Maps &amp; AirDroid (Screen-Off)</string>
+    <string name="app_standby_title">📦 New Apps &amp; Background Optimizer</string>
+    <string name="btn_optimize_new_apps">Optimize Third-Party Apps</string>
+    <string name="daily_maintenance_title">⏰ Automated Daily Maintenance</string>
+    <string name="daily_maintenance_toggle">Run Daily Auto-Optimization</string>
+    <string name="daily_maintenance_sub">Trims UFS storage, sweeps RAM cache, and verifies safeguards every 24h while charging</string>
+</resources>
