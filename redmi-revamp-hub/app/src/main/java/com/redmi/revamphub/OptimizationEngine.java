@@ -123,7 +123,10 @@ public class OptimizationEngine {
         // 7. Critical Safeguards
         list.addAll(getSafeguardCommands());
 
-        // 8. Hardware Maintenance
+        // 8. Critical AOT ARM64 Native Compilation
+        list.addAll(getCriticalAotCommands());
+
+        // 9. Hardware Maintenance
         list.add("logcat -G 256K");
         list.add("sm fstrim");
         list.add("pm trim-caches 2000M");
@@ -207,6 +210,37 @@ public class OptimizationEngine {
         list.add("settings put global private_dns_mode hostname");
         list.add("settings put global private_dns_specifier dns.adguard-dns.com");
 
+        // AOT Native Compilation for critical apps & profile compilation for newly updated apps
+        list.addAll(getCriticalAotCommands());
+        list.add("cmd package compile -m speed-profile -a");
+
         return list;
+    }
+
+    public static final String[] CRITICAL_AOT_PACKAGES = {
+        "com.android.systemui",
+        "com.miui.home",
+        "com.whatsapp",
+        "com.app.nobrokerhood",
+        "com.google.android.apps.maps",
+        "com.sand.airdroidkids",
+        "com.redmi.revamphub",
+        "moe.shizuku.privileged.api"
+    };
+
+    public static List<String> getCriticalAotCommands() {
+        List<String> list = new ArrayList<>();
+        for (String pkg : CRITICAL_AOT_PACKAGES) {
+            list.add("cmd package compile -m speed " + pkg);
+        }
+        return list;
+    }
+
+    public static String getFullAotCommand() {
+        return "cmd package compile -m speed -a";
+    }
+
+    public static String getResetAotCommand() {
+        return "cmd package compile --reset -a";
     }
 }

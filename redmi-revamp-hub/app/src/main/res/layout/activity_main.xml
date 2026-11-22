@@ -483,6 +483,98 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+            <!-- AOT ARM64 NATIVE COMPILATION CARD -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_dark"
+                app:strokeColor="@color/accent"
+                app:strokeWidth="1.5dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/aot_title"
+                        android:textColor="@color/accent"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="4dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/aot_subtitle"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:layout_marginBottom="14dp" />
+
+                    <!-- Fast Compile Critical Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAotCritical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_aot_critical"
+                        android:backgroundTint="@color/accent"
+                        android:textColor="@color/background_dark"
+                        android:textStyle="bold"
+                        app:cornerRadius="10dp"
+                        android:layout_marginBottom="8dp" />
+
+                    <!-- Full Compile All Apps Button -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAotAll"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/btn_aot_all"
+                        android:textColor="@color/accent"
+                        app:strokeColor="@color/accent"
+                        app:cornerRadius="10dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Daily Auto-Compile Switch -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/toggle_aot_daily"
+                                android:textColor="@color/text_primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/toggle_aot_daily_sub"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/switchAutoAotDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- SECTION 2: CRITICAL SAFEGUARDS -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"

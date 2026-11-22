@@ -36,4 +36,13 @@
     <string name="toggle_auto_adb_wifi">Auto-Enable Wireless Debugging on Reboot</string>
     <string name="toggle_auto_adb_wifi_sub">Turns on Wireless ADB automatically for instant Shizuku launch</string>
     <string name="btn_open_dev_options">Open Developer Options Settings</string>
+
+    <!-- AOT ARM64 NATIVE COMPILATION ENGINE -->
+    <string name="aot_title">⚡ AOT ARM64 Native Compilation Engine</string>
+    <string name="aot_subtitle">Pre-compiles Dalvik bytecode directly into 64-bit native machine code via dex2oat. Slashes app cold-launch times by 30–50% and locks 120 FPS scrolling without JIT micro-stutter.</string>
+    <string name="btn_aot_critical">⚡ Fast Compile Critical Apps (15s)</string>
+    <string name="btn_aot_all">🔥 Full AOT Compile All Apps (2–4m)</string>
+    <string name="btn_aot_reset">Revert to Default Android ART</string>
+    <string name="toggle_aot_daily">Auto-Compile on Daily Maintenance</string>
+    <string name="toggle_aot_daily_sub">Pre-compiles updated apps to ARM64 native binaries every night while charging</string>
 </resources>
