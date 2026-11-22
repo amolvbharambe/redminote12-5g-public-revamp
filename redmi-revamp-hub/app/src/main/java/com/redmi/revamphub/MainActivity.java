@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView tvTerminalLog;
 
+    // Performance Toggles
     private MaterialSwitch switch120Hz;
     private MaterialSwitch switchAnimations;
     private MaterialSwitch switchAdGuard;
@@ -45,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
     private MaterialSwitch switchModemSleep;
     private MaterialSwitch switch5GBoost;
 
+    // Developer Mode Controller
+    private MaterialSwitch switchDeveloperMode;
+    private MaterialSwitch switchAutoDevMode;
+    private MaterialSwitch switchAutoAdbWifi;
+    private MaterialButton btnOpenDevSettings;
+
+    // Safeguards & Maintenance
     private MaterialButton btnEnforceSafeguards;
     private MaterialButton btnOptimizeApps;
     private MaterialSwitch switchDailyMaintenance;
@@ -88,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         switchModemSleep = findViewById(R.id.switchModemSleep);
         switch5GBoost = findViewById(R.id.switch5GBoost);
 
+        switchDeveloperMode = findViewById(R.id.switchDeveloperMode);
+        switchAutoDevMode = findViewById(R.id.switchAutoDevMode);
+        switchAutoAdbWifi = findViewById(R.id.switchAutoAdbWifi);
+        btnOpenDevSettings = findViewById(R.id.btnOpenDevSettings);
+
         btnEnforceSafeguards = findViewById(R.id.btnEnforceSafeguards);
         btnOptimizeApps = findViewById(R.id.btnOptimizeApps);
         switchDailyMaintenance = findViewById(R.id.switchDailyMaintenance);
@@ -103,6 +117,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         updateShizukuStatus();
+        if (switchDeveloperMode != null) {
+            switchDeveloperMode.setChecked(isDeveloperModeEnabled());
+        }
     }
 
     @Override
@@ -111,6 +128,14 @@ public class MainActivity extends AppCompatActivity {
         Shizuku.removeRequestPermissionResultListener(permissionListener);
         Shizuku.removeBinderReceivedListener(binderReceivedListener);
         Shizuku.removeBinderDeadListener(binderDeadListener);
+    }
+
+    private boolean isDeveloperModeEnabled() {
+        try {
+            return Settings.Global.getInt(getContentResolver(), "development_settings_enabled", 0) == 1;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     private void updateShizukuStatus() {
@@ -132,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 if (launchIntent != null) {
                     startActivity(launchIntent);
                 } else {
-                    Toast.makeText(this, "Shizuku app not found. Please install Shizuku from Play Store.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Shizuku-Next not found. Please install Shizuku-Next.", Toast.LENGTH_LONG).show();
                     try {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=moe.shizuku.privileged.api")));
                     } catch (Exception ignored) {}
@@ -148,6 +173,11 @@ public class MainActivity extends AppCompatActivity {
         switchFastDoze.setChecked(prefs.getBoolean("pref_fast_doze", true));
         switchModemSleep.setChecked(prefs.getBoolean("pref_modem_sleep", true));
         switch5GBoost.setChecked(prefs.getBoolean("pref_5g_boost", true));
+
+        switchDeveloperMode.setChecked(isDeveloperModeEnabled());
+        switchAutoDevMode.setChecked(prefs.getBoolean("pref_auto_dev_mode", true));
+        switchAutoAdbWifi.setChecked(prefs.getBoolean("pref_auto_adb_wifi", true));
+
         switchDailyMaintenance.setChecked(prefs.getBoolean("pref_daily_maintenance", true));
     }
 
@@ -213,9 +243,40 @@ public class MainActivity extends AppCompatActivity {
             appendLog("5G Multi-Carrier Aggregation: " + (isChecked ? "Un-Throttled" : "Default"));
         });
 
+        // DEVELOPER MODE CONTROLLER LISTENERS
+        switchDeveloperMode.setOnCheckedChangeListener((btn, isChecked) -> {
+            int val = isChecked ? 1 : 0;
+            try {
+                Settings.Global.putInt(getContentResolver(), "development_settings_enabled", val);
+                appendLog("Developer Mode: " + (isChecked ? "Enabled" : "Disabled"));
+            } catch (SecurityException e) {
+                ShellExecutor.execute("settings put global development_settings_enabled " + val, null);
+                appendLog("Developer Mode: " + (isChecked ? "Enabled (via Shizuku)" : "Disabled (via Shizuku)"));
+            }
+        });
+
+        switchAutoDevMode.setOnCheckedChangeListener((btn, isChecked) -> {
+            prefs.edit().putBoolean("pref_auto_dev_mode", isChecked).apply();
+            appendLog("Auto-Enable Dev Mode on Reboot: " + (isChecked ? "ON" : "OFF"));
+        });
+
+        switchAutoAdbWifi.setOnCheckedChangeListener((btn, isChecked) -> {
+            prefs.edit().putBoolean("pref_auto_adb_wifi", isChecked).apply();
+            appendLog("Auto-Enable Wireless ADB on Reboot: " + (isChecked ? "ON" : "OFF"));
+        });
+
+        btnOpenDevSettings.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS);
+                startActivity(intent);
+            } catch (Exception e) {
+                Toast.makeText(this, "Could not open Developer Options", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         // Enforce Safeguards Button
         btnEnforceSafeguards.setOnClickListener(v -> {
-            appendLog(">>> Enforcing Safeguards for NoBrokerHood, WhatsApp, Maps...");
+            appendLog(">>> Enforcing Safeguards for NoBrokerHood, WhatsApp, Maps, Shizuku-Next...");
             List<String> commands = OptimizationEngine.getSafeguardCommands();
             ShellExecutor.executeBatch(commands, new ShellExecutor.BatchCallback() {
                 @Override
@@ -223,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
                 @Override
                 public void onComplete(boolean allSuccess) {
-                    appendLog("✓ Safeguards active: NoBrokerHood, WhatsApp, Maps exempt & autostart enabled.");
+                    appendLog("✓ Safeguards active: Critical apps & Shizuku-Next protected from background killer.");
                     Toast.makeText(MainActivity.this, "Safeguards verified and active!", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -287,7 +348,8 @@ public class MainActivity extends AppCompatActivity {
                 appendLog("• 120Hz display & 0.5x animations locked");
                 appendLog("• AdGuard Private DNS active");
                 appendLog("• Fast Deep Sleep active (2-min Doze)");
-                appendLog("• NoBrokerHood, WhatsApp & Maps fully safeguarded");
+                appendLog("• Shizuku-Next daemon safeguarded");
+                appendLog("• WRITE_SECURE_SETTINGS granted for boot recovery");
                 appendLog("• Storage FSTRIM & Cache purged");
                 appendLog("==================================================");
                 Toast.makeText(MainActivity.this, "Redmi Note 12 5G Fully Optimized!", Toast.LENGTH_LONG).show();

@@ -26,4 +26,14 @@
     <string name="daily_maintenance_title">⏰ Automated Daily Maintenance</string>
     <string name="daily_maintenance_toggle">Run Daily Auto-Optimization</string>
     <string name="daily_maintenance_sub">Trims UFS storage, sweeps RAM cache, and verifies safeguards every 24h while charging</string>
+
+    <!-- DEVELOPER MODE & WIRELESS ADB CONTROLLER -->
+    <string name="dev_mode_title">🛠️ Developer Mode &amp; Wireless ADB Control</string>
+    <string name="toggle_dev_mode">Developer Mode (Master Switch)</string>
+    <string name="toggle_dev_mode_sub">Turn Developer Options ON or OFF instantly</string>
+    <string name="toggle_auto_dev_mode">Auto-Enable on Device Reboot</string>
+    <string name="toggle_auto_dev_mode_sub">Automatically re-enables Developer Mode when phone starts</string>
+    <string name="toggle_auto_adb_wifi">Auto-Enable Wireless Debugging on Reboot</string>
+    <string name="toggle_auto_adb_wifi_sub">Turns on Wireless ADB automatically for instant Shizuku launch</string>
+    <string name="btn_open_dev_options">Open Developer Options Settings</string>
 </resources>

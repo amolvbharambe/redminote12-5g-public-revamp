@@ -167,6 +167,9 @@ public class OptimizationEngine {
         list.add("cmd appops set moe.shizuku.privileged.api 10008 allow");
         list.add("cmd appops set moe.shizuku.privileged.api RUN_ANY_IN_BACKGROUND allow");
 
+        // Self-Permission: grant WRITE_SECURE_SETTINGS to Revamp Hub for boot & standalone control
+        list.add("pm grant com.redmi.revamphub android.permission.WRITE_SECURE_SETTINGS 2>/dev/null");
+
         return list;
     }
 
